@@ -1,12 +1,12 @@
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-	<div class="container px-5">
-		<a class="navbar-brand" data-turbo="false" href="/"><%= image_tag("img/d_logo.png", width: "40") %> Dspg Hostel</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+	<div class="container px-4 px-lg-5">
+		<a class="navbar-brand text-uppercase" data-turbo="false" href="/"><%= image_tag("img/d_logo.png", width: "40") %> Dspg Bookshop</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ms-auto">
-				<%# <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li> %>
-				<li class="nav-item"><a class="nav-link btn btn-primary" href="<%= new_account_session_path %>">Log In</a></li>
+			<ul class="navbar-nav ms-auto my-2 my-lg-0">
+				<li class="nav-item"><a class="nav-link" href="<%= new_user_session_path %>">Staff login <i class="bi bi-box-arrow-in-right"></i></a></li>
+				<li class="nav-item"><a class="nav-link" href="<%= new_account_session_path %>">Lecturer login <i class="bi bi-box-arrow-in-right"></i></a></li>
 			</ul>
 		</div>
 	</div>

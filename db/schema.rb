@@ -10,24 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_18_104606) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_14_133154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accommondations", force: :cascade do |t|
-    t.string "ref_no"
-    t.decimal "amount"
-    t.string "hostel"
-    t.string "room_type"
-    t.integer "room_no"
-    t.string "bed"
-    t.boolean "active"
-    t.string "session"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.integer "room_type_id"
-  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -45,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_18_104606) do
     t.date "date_of_birth"
     t.string "gender"
     t.string "username"
+    t.string "name_title"
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
@@ -52,7 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_18_104606) do
     t.string "lga"
     t.string "state"
     t.string "country"
-    t.string "mat_no"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
@@ -95,46 +80,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_18_104606) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "beds", force: :cascade do |t|
-    t.string "bed_name"
-    t.bigint "room_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "reserved", default: false
-    t.index ["room_id"], name: "index_beds_on_room_id"
-  end
-
   create_table "emailers", force: :cascade do |t|
     t.string "email"
     t.string "subject"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "hostel_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "room_types", force: :cascade do |t|
-    t.string "name"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "hostel_type_id", null: false
-    t.index ["hostel_type_id"], name: "index_room_types_on_hostel_type_id"
-  end
-
-  create_table "rooms", force: :cascade do |t|
-    t.integer "room_number"
-    t.bigint "room_type_id", null: false
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "number_of_beds"
-    t.index ["room_type_id"], name: "index_rooms_on_room_type_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -163,7 +114,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_18_104606) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "beds", "rooms"
-  add_foreign_key "room_types", "hostel_types"
-  add_foreign_key "rooms", "room_types"
 end
