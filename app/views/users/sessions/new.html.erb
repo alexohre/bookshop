@@ -13,7 +13,7 @@
 						</a>
 					</div>
 					<!-- /Logo -->
-					<h4 class="mb-2">Welcome Back 👋</h4>
+					<h4 class="mb-2 text-center">Staff Login, Welcome Back 👋</h4>
 					<p class="mb-4">Please sign-in to your account</p>
 
 						<%= form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f| %>
@@ -32,7 +32,7 @@
 						<div class="mb-3 form-password-toggle">
 							<div class="d-flex justify-content-between">
 								<label class="form-label" for="password">Password</label>
-								<a href="/auth/secret/new">
+								<a href="/admin/secret/new" class="pe-none">
 									<small>Forgot Password?</small>
 								</a>
 							</div>

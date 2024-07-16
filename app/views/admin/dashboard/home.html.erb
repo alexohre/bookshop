@@ -38,7 +38,7 @@
                 
               </div>
               <span class="fw-semibold d-block mb-1">Students</span>
-              <h3 class="card-title mb-2"><%= @total_acc %></h3>
+              <h3 class="card-title mb-2"><%= 0 %></h3>
             </div>
           </div>
         </div>
@@ -78,30 +78,30 @@
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                  <% if @accommondations.present? %>
-                    <% @accommondations.each do |acc| %>
+                  <%# if @accommondations.present? %>
+                    <%# @accommondations.each do |acc| %>
                       <tr>
-                        <td><small><%= acc.ref_no %></small></td>
-                        <td><%= number_to_currency(acc.amount, precision: 2, unit: "₦") %></td>
+                        <td><small><%#= acc.ref_no %></small></td>
+                        <td><%#= number_to_currency(acc.amount, precision: 2, unit: "₦") %></td>
                         <td>
-                          <% full_name = "#{acc.account&.first_name} #{acc.account&.last_name}" if acc.account&.first_name.present? && acc.account&.last_name.present? %>
-                          <%= full_name.present? ? full_name : "Awaiting names" %>
+                          <%# full_name = "#{acc.account&.first_name} #{acc.account&.last_name}" if acc.account&.first_name.present? && acc.account&.last_name.present? %>
+                          <%#= full_name.present? ? full_name : "Awaiting names" %>
                         </td>
                         <td>
-                            <%= acc.hostel %>
+                            <%#= acc.hostel %>
                         </td>
-                        <td><%= acc.room_type %></td>
-                        <td><%= acc.bed %></td>
+                        <td><%#= acc.room_type %></td>
+                        <td><%#= acc.bed %></td>
                         <td>
-                          <%= acc.created_at.strftime("	%d-%m-%Y ") %>
+                          <%#= acc.created_at.strftime("	%d-%m-%Y ") %>
                         </td>
                       </tr>
-                    <% end %>
-                  <% else %>
+                    <%# end %>
+                  <%# else %>
                     <tr >
                       <td colspan="6" class="text-center fs-3 ">No Accommodations Yet </td>
                     </tr>
-                  <% end %>
+                  <%# end %>
                 </tbody>
               </table>
             </div>

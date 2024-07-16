@@ -1,0 +1,63 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+	<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Students</h4>
+	<div class="row">
+		<div class="card">
+			<div class="col-lg-6 col-md-3 mx-auto">
+				<div class="text-center">
+					<%= search_form_for @q, url: admin_students_url do |f| %>
+						<div class="input-group mt-3 mb-2 text-">
+							<%= f.search_field :mat_no_or_first_name_or_last_name_cont, class: "form-control", placeholder: "Search user..." %>
+							<%# <input type="text" class="form-control" placeholder="Search User..." aria-label="Search User..." aria-describedby="button-addon2"> %>
+							<button class="btn btn-primary" type="submit" id="button-addon2" data-turbo="false">
+								<span class="tf-icons bx bx-search-alt"></span>
+								Search
+							</button>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<div class="table-responsive text-nowrap">
+				<table class="table table-striped mb-2">
+					<thead>
+						<tr>
+							<th>Email</th>
+							<th>Mat No.</th>
+							<th>Names</th>
+							<th>Department</th>
+							<th>Course</th>
+							<th>Level</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody class="table-border-bottom-0">
+						<% @students.each do |student|  %>
+							<tr>
+								<td><%= student.email %></td>
+								<td><strong><%= student.mat_no %></strong></td>
+								<% full_name = "#{student.first_name} #{student.last_name} #{student.other_name}" if student.first_name.present? && student.last_name.present? && student.other_name.present? %>
+								<td><%= full_name.present? ? full_name : 'awaiting names' %></td>
+								<td>
+									<%= student.department %>
+								</td>
+								<td><%= student.course %></td>
+								<td><%= student.level %></td>
+								<td>
+									<div class="dropdown" >
+										<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+											<i class="bx bx-dots-vertical-rounded"></i>
+										</button>
+										<div class="dropdown-menu" >
+											<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<%# pagination %>
+		<%= render 'admin/shared/pagy', locals: {pagy: @pagy} %>
+	</div>
+</div>

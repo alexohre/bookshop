@@ -2,7 +2,7 @@
 	<div class="app-brand demo">
 		<a href="<%= admin_dashboard_path %>" class="app-brand-link" data-turbo="false">
 			<%= image_tag("img/d_logo.png", width: "40") %>
-			<span class="app-brand-text demo menu-text fw-bolder ms-2">Hostel</span>
+			<span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize">Bookshop</span>
 		</a>
 		<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 			<i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -20,54 +20,59 @@
 		<li class="menu-header small">
 			<span class="menu-header-text">Pages</span>
 		</li>
-		<% if defined?(@account) && @account.present? %>
-			<li class="menu-item <%= 'active open' if request.path == admin_users_path || request.path == admin_path(@account) %>">
-			<% else %>
-				<li class="menu-item <%= 'active open' if request.path == admin_users_path %>">
-				<% end %>
+		<%# if defined?(@account) && @account.present? %>
+		<li class="menu-item <%= 'active open' if request.path == admin_students_path  %>">
+			<%# else %>
+			<li class="menu-item <%= 'active open' if request.path == admin_students_path || request.path == admin_new_student_path %>">
+				<%# end %>
 				<a href="javascript:void(0);" class="menu-link menu-toggle">
 					<i class="menu-icon tf-icons bx bx-group"></i>
 					<div data-i18n="Account Settings">Students</div>
 				</a>
 				<ul class="menu-sub">
-					<li class="menu-item <%= 'active' if request.path == admin_users_path %>">
-						<a href="<%= admin_users_path%>" class="menu-link" data-turbo="false">
+					<li class="menu-item <%= 'active' if request.path == admin_students_path %>">
+						<a href="<%= admin_students_path%>" class="menu-link" data-turbo="false">
 							<div data-i18n="Account">Overview</div>
+						</a>
+					</li>
+					<li class="menu-item <%= 'active' if request.path == admin_new_student_path %>">
+						<a href="<%= admin_new_student_path%>" class="menu-link" data-turbo="false">
+							<div data-i18n="Account">Add Student</div>
 						</a>
 					</li>
 				</ul>
 			</li>
 			<!-- Extended components -->
-			<% if defined?(@room_type) && @room_type.present? %>
-				<li class="menu-item <%= 'active open' if request.path == admin_room_types_path || request.path == edit_admin_room_type_path(@room_type) %>">
-				<% else %>
-					<li class="menu-item <%= 'active open' if request.path == admin_room_types_path %>">
-					<% end %>
+			<%# if defined?(@room_type) && @room_type.present? %>
+			<li class="menu-item <%#= 'active open' if request.path == admin_room_types_path || request.path == edit_admin_room_type_path(@room_type) %>">
+				<%# else %>
+				<li class="menu-item <%#= 'active open' if request.path == admin_room_types_path %>">
+					<%# end %>
 					<a href="javascript:void(0);" class="menu-link menu-toggle">
 						<i class="menu-icon tf-icons bx bx-buildings"></i>
 						<div data-i18n="Account Settings">Room Type</div>
 					</a>
 					<ul class="menu-sub">
-						<li class="menu-item <%= 'active' if request.path == admin_room_types_path %>">
-							<a href="<%= admin_room_types_path %>" class="menu-link" data-turbo="false">
+						<li class="menu-item <%#= 'active' if request.path == admin_room_types_path %>">
+							<a href="<%#= admin_room_types_path %>" class="menu-link" data-turbo="false">
 								<div data-i18n="Account">Overview</div>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<!-- Extended components -->
-				<% if defined?(@room) && @room.present? %>
-					<li class="menu-item <%= 'active open' if request.path == admin_rooms_path || request.path == edit_admin_room_path(@room) || request.path == admin_room_path(@room) %>">
-					<% else %>
-						<li class="menu-item <%= 'active open' if request.path == admin_rooms_path %>">
-						<% end %>
+				<%# if defined?(@room) && @room.present? %>
+				<li class="menu-item <%#= 'active open' if request.path == admin_rooms_path || request.path == edit_admin_room_path(@room) || request.path == admin_room_path(@room) %>">
+					<%# else %>
+					<li class="menu-item <%#= 'active open' if request.path == admin_rooms_path %>">
+						<% #end %>
 						<a href="javascript:void(0);" class="menu-link menu-toggle">
 							<i class="menu-icon tf-icons bx bx-building"></i>
 							<div data-i18n="Account Settings">Rooms</div>
 						</a>
 						<ul class="menu-sub">
-							<li class="menu-item <%= 'active' if request.path == admin_rooms_path %>">
-								<a href="<%= admin_rooms_path %>" class="menu-link" data-turbo="false">
+							<li class="menu-item <%#= 'active' if request.path == admin_rooms_path %>">
+								<a href="<%#= admin_rooms_path %>" class="menu-link" data-turbo="false">
 									<div data-i18n="Account">Overview</div>
 								</a>
 							</li>
@@ -75,8 +80,8 @@
 					</li>
 					<!-- Extended components -->
 					<!-- Cards -->
-					<li class="menu-item <%= 'active' if request.path == admin_accommondations_path %>">
-						<a href="<%= admin_accommondations_path %>" class="menu-link" data-turbo="false">
+					<li class="menu-item <%#= 'active' if request.path == admin_accommondations_path %>">
+						<a href="<%#= admin_accommondations_path %>" class="menu-link" data-turbo="false">
 							<i class="menu-icon tf-icons bx bx-building-house"></i>
 							<div data-i18n="Basic">Accommodations</div>
 						</a>

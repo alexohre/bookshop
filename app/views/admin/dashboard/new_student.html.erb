@@ -1,0 +1,105 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+	<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Add Student Record</h4>
+	<div class="row">
+		<div class="demo-inline-spacing mb-3">
+			<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modalCenter" >Import CSV file</button>
+		</div>
+		<div class="col-lg-8 col-md-12 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					<%= form_with model: @student, url: admin_students_path, data: {turbo: false}, local: true do |form| %>
+						<div class="row">
+							<% if @student.errors.any? %>
+								<div id="error_explanation">
+									<div class="alert alert-danger alert-dismissible pb-1" role="alert">
+										<ul>
+											<% @student.errors.full_messages.each do |message| %>
+												<li><%= message %></li>
+											<% end %>
+											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+										</ul>
+									</div>
+								</div>
+							<% end %>
+							<div class="mb-3 col-md-6">
+								<%= form.label :first_name, "First Name", class: "form-label" %>
+								<%= form.text_field :first_name, class: "form-control", autofocus: true %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :last_name, "Last Name", class: "form-label" %>
+								<%= form.text_field :last_name, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :email, "E-mail", class: "form-label" %>
+								<%= form.text_field :email, class: "form-control", placeholder: "john@example.com" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :other_name, "Other Name", class: "form-label" %>
+								<%= form.text_field :other_name, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :mat_no, "Mat No", class: "form-label" %>
+								<%= form.text_field :mat_no, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :department, "Department", class: "form-label" %>
+								<%= form.text_field :department, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :course, "Course", class: "form-label" %>
+								<%= form.text_field :course, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-6">
+								<%= form.label :level, "Level", class: "form-label" %>
+								<%= form.text_field :level, class: "form-control" %>
+							</div>
+						</div>
+						<div class="mt-2">
+							<%= form.submit "Save changes", class: "btn btn-primary me-2" %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<%# pagination %>
+	</div>
+</div>
+<%#  %>
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+	<div class="mt-3">
+		<!-- Button trigger modal -->
+		<!-- Modal -->
+		<%= form_with url: import_admin_students_path, local: true, multipart: true do |form| %>
+			<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalCenterTitle">Import CSV file</h5>
+							<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="mb-3">
+									<%= form.label :file, "Upload CSV file" %>
+									<%= form.file_field :file, class: "form-control" %>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+								Close
+							</button>
+							<%= form.submit "Import Students", class: "btn btn-primary" %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

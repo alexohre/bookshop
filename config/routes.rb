@@ -18,8 +18,15 @@ Rails.application.routes.draw do
     
     resource :site, only: [:new, :create, :edit, :update]
     get 'dashboard', to: 'dashboard#home'
-    get 'users', to: 'dashboard#users'
+    get 'bookshop', to: 'sales#home'
+    get 'sales', to: 'sales#sales'
+    get 'students', to: 'dashboard#students'
+    get 'new_student', to: 'dashboard#new_student'
     get 'users/:id', to: 'dashboard#show'
+
+    resources :students, only: [:new, :create] do
+      collection { post :import }
+    end
     # post 'masquerade_as_account', to: 'dashboard#masquerade_as_account'
     # delete account
     delete 'users/:id', to: 'dashboard#destroy'
