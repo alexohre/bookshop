@@ -18,7 +18,7 @@ class Admin::StudentsController < AdminController
       Student.import(params[:file])
       redirect_to admin_students_path, notice: "Students imported."
      else
-      redirect_to students_path, alert: "Please upload a CSV file."
+      redirect_to admin_new_student_path, alert: "Please upload a CSV file."
     end
   end
 

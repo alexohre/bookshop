@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     resources :students, only: [:new, :create] do
       collection { post :import }
     end
+
+    get 'staffs', to: 'staffs#index'
+    post 'staffs', to: 'staffs#create'
     # post 'masquerade_as_account', to: 'dashboard#masquerade_as_account'
     # delete account
     delete 'users/:id', to: 'dashboard#destroy'

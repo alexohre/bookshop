@@ -12,6 +12,14 @@ class User < ApplicationRecord
 
   enum role: [:admin, :staff, :supervisor]
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["email", "first_name", "id", "last_name", "role", "username"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["avatar_attachment", "avatar_blob"]
+  end
+
   private
 
   def generate_username
