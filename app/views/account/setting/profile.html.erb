@@ -18,13 +18,16 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="mb-3 col-md-6">
+							<strong>Title:</strong> <%= current_account.name_title.present? ? current_account.name_title : "NIL" %>
+						</div>
+						<div class="mb-3 col-md-6">
 							<strong>First Name:</strong> <%= current_account.first_name.present? ? current_account.first_name : "NIL" %>
 						</div>
 						<div class="mb-3 col-md-6">
 							<strong>Last Name:</strong> <%= current_account.last_name.present? ? current_account.last_name : "NIL" %>
 						</div>
 						<div class="mb-3 col-md-6">
-							<strong>Mat No:</strong> <span class="text-uppercase fw-bold text-primary"><%= current_account.mat_no.present? ? current_account.mat_no : "NIL" %></span>
+							<strong>Staff No:</strong> <span class="text-uppercase fw-bold text-primary"><%= current_account.staff_no.present? ? current_account.staff_no : "NIL" %></span>
 						</div>
 						<div class="mb-3 col-md-6">
 							<strong>Email:</strong> <%= current_account.email.present? ? current_account.email : "NIL" %>
@@ -36,19 +39,21 @@
 							<strong>Phone Number:</strong> <%= current_account.phone_number.present? ? current_account.phone_number : "NIL" %>
 						</div>
 						<div class="mb-3 col-md-6">
-							<strong>Address:</strong> <%= current_account.address.present? ? current_account.address : "NIL" %>
-						</div>
-						<div class="mb-3 col-md-6">
-							<strong>State:</strong> <%= current_account.state.present? ? current_account.state : "NIL" %>
-						</div>
-						<div class="mb-3 col-md-6">
-							<strong>Country:</strong> <%= current_account.country.present? ? current_account.country : "NIL" %>
-						</div>
-						<div class="mb-3 col-md-6">
 							<strong>Date of Birth:</strong> <%= current_account.date_of_birth.present? ? current_account.date_of_birth : "NIL" %>
 						</div>
 						<div class="mb-3 col-md-6">
 							<strong>Gender:</strong> <%= current_account.gender.present? ? current_account.gender : "NIL" %>
+						</div>
+						<hr>
+						<h4>Bank Details</h4>
+						<div class="mb-3 col-md-4">
+							<strong>Bank Name:</strong> <%= current_account.bank_name.present? ? current_account.bank_name : "NIL" %>
+						</div>
+						<div class="mb-3 col-md-4">
+							<strong>State:</strong> <%= current_account.account_name.present? ? current_account.account_name : "NIL" %>
+						</div>
+						<div class="mb-3 col-md-4">
+							<strong>Country:</strong> <%= current_account.account_no.present? ? current_account.account_no : "NIL" %>
 						</div>
 					</div>
 				</div>

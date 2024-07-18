@@ -27,17 +27,21 @@
 					<div class="card-body">
 						<%= render "accounts/shared/error_messages", resource: resource %>
 						<div class="row">
-							<div class="mb-3 col-md-6">
+							<div class="mb-3 col-md-4">
+								<%= f.label :name_title, class: "form-label" %> <span class="text-danger">*</span>
+								<%= f.text_field :name_title, class: "form-control", placeholder: "ex. Dr" %>
+							</div>
+							<div class="mb-3 col-md-4">
 								<%= f.label :first_name, class: "form-label" %> <span class="text-danger">*</span>
 								<%= f.text_field :first_name, class: "form-control", placeholder: "John" %>
 							</div>
-							<div class="mb-3 col-md-6">
+							<div class="mb-3 col-md-4">
 								<%= f.label :last_name, class: "form-label" %> <span class="text-danger">*</span>
 								<%= f.text_field :last_name, class: "form-control", placeholder: "Doe" %>
 							</div>
 							<div class="mb-3 col-md-6">
-								<%= f.label :mat_no, class: "form-label" %> <span class="text-danger">*</span>
-								<%= f.text_field :mat_no, class: "form-control text-uppercase", readonly: true %>
+								<%= f.label :staff_no, class: "form-label" %> <span class="text-danger">*</span>
+								<%= f.text_field :staff_no, class: "form-control text-uppercase" %>
 							</div>
 							<div class="mb-3 col-md-6">
 								<%= f.label :email, class: "form-label" %> <span class="text-danger">*</span>
@@ -49,23 +53,7 @@
 							</div>
 							<div class="mb-3 col-md-6">
 								<%= f.label :phone_number, class: "form-label" %>
-								<%= f.text_field :phone_number, class: "form-control", placeholder: "(+1) 202 555 0111" %>
-							</div>
-							<div class="mb-3 col-md-6">
-								<%= f.label :address, class: "form-label" %> <span class="text-danger">*</span>
-								<%= f.text_area :address, class: "form-control", placeholder: "123 Main Str" %>
-							</div>
-							<div class="mb-3 col-md-6">
-								<%= f.label :state, class: "form-label" %> <span class="text-danger">*</span>
-								<%= f.text_field :state, class: "form-control", placeholder: "California" %>
-							</div>
-							<div class="mb-3 col-md-6">
-								<%= f.label :lga, "LGA", class: "form-label" %>
-								<%= f.text_field :lga, class: "form-control", placeholder: "231465" %>
-							</div>
-							<div class="mb-3 col-md-6">
-								<%= f.label :country, class: "form-label" %> <span class="text-danger">*</span>
-								<%= f.text_field :country, class: "form-control", placeholder: "United States" %>
+								<%= f.text_field :phone_number, class: "form-control", placeholder: "(+234) 202 555 0111" %>
 							</div>
 							<div class="mb-3 col-md-6">
 								<%= f.label :date_of_birth, class: "form-label" %>
@@ -74,6 +62,20 @@
 							<div class="mb-3 col-md-6">
 								<%= f.label :gender, class: "form-label" %> <span class="text-danger">*</span>
 								<%= f.select :gender, options_for_select([['Male', 'male'], ['Female', 'female']], selected: resource.gender), { prompt: "Select gender" }, class: "form-control" %>
+							</div>
+							<hr>
+							<h4>Bank Details</h4>
+							<div class="mb-3 col-md-4">
+								<%= f.label :bank_name, class: "form-label" %>
+								<%= f.text_field :bank_name, autocomplete: "email", class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-4">
+								<%= f.label :account_name, class: "form-label" %>
+								<%= f.text_field :account_name, class: "form-control" %>
+							</div>
+							<div class="mb-3 col-md-4">
+								<%= f.label :account_no, class: "form-label" %>
+								<%= f.text_field :account_no, class: "form-control"%>
 							</div>
 						</div>
 						<div class="mt-2">

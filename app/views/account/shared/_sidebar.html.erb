@@ -2,7 +2,7 @@
 	<div class="app-brand demo">
 		<a href="<%= account_dashboard_path %>" data-turbo="false" class="app-brand-link">
 			<%= image_tag("img/d_logo.png", width: "40") %>
-			<span class="app-brand-text demo menu-text fw-bolder ms-2">Hostel</span>
+			<span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize">Bookshop</span>
 		</a>
 		<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
 			<i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -22,10 +22,10 @@
 		</li>
 		<!-- Extended components -->
 		<!-- Components -->
-		<li class="menu-item <%= 'active' if request.path == account_accommondations_path || request.path == new_account_accommondation_path %>">
-			<a href="<%= account_accommondations_path %>" data-turbo="false" class="menu-link" >
-				<i class="menu-icon tf-icons bx bx-bed"></i>
-				<div data-i18n="Analytics">Bed Space</div>
+		<li class="menu-item <%= 'active' if request.path == account_books_path %>">
+			<a href="<%= account_books_path %>" data-turbo="false" class="menu-link" >
+				<i class="menu-icon tf-icons bx bx-book"></i>
+				<div data-i18n="Analytics">Books</div>
 			</a>
 		</li>
 		<!-- User interface -->

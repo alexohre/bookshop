@@ -9,11 +9,10 @@ class Account < ApplicationRecord
 
   has_one_attached :avatar, dependent: :destroy
 
-  belongs_to :bed, optional: true # Account can exist with a bed assignment
-  has_many :accommondations
+  has_many :books, dependent: :destroy
 
   validate :date_of_birth_must_be_past_18_years
-  validates :first_name, :last_name, :username, :address, :state, :country, :gender, presence: true, unless: :new_record?
+  validates :first_name, :last_name, :username, :staff_no, :gender, :name_title, :bank_name, :account_name, :account_no, :phone_number, presence: true, unless: :new_record?
 
   
   private
@@ -38,5 +37,6 @@ class Account < ApplicationRecord
     prefix, domain = email.split('@')
     random_chars = SecureRandom.hex(3) # 6 random characters in hexadecimal form
     self.username = "#{prefix}_#{random_chars}"
+    domain.nil
   end
 end

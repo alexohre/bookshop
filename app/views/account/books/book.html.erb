@@ -1,0 +1,93 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+	<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Books</h4>
+	<div class="row">
+		<div class="col-lg-6 mb-3 ms-auto">
+			<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modalCenter" >Add Book</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="card">
+			<div class="table-responsive text-nowrap">
+				<table class="table table-striped mb-2">
+					<thead class="text-center">
+						<tr>
+							<th>Book Title</th>
+							<th>Lecturer Names</th>
+							<th>Book type</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody class="table-border-bottom-0">
+						<% @books.each do |book|  %>
+							<tr class="text-center">
+								<td><%= book.title %></td>
+								<% full_name = "#{book.account.name_title} #{book.account.first_name} #{book.account.last_name}" if book.account.name_title.present? && book.account.first_name.present? && book.account.last_name.present? %>
+								<td><%= full_name.present? ? full_name : 'awaiting names' %></td>
+								<td>
+									<%= book.book_type %>
+								</td>
+								<td>
+									<div class="dropdown" >
+										<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+											<i class="bx bx-dots-vertical-rounded"></i>
+										</button>
+										<div class="dropdown-menu" >
+											<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<%# pagination %>
+		<%= render 'account/shared/pagy', locals: {pagy: @pagy} %>
+	</div>
+</div>
+<%#  %>
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+	<div class="mt-3">
+		<%= form_with url: account_books_path, method: :post, local: true do |form| %>
+			<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalCenterTitle">Textbook fee <span class="text-danger fw-bold">200</span> & Manual fee <span class="text-danger fw-bold">100</span></h5>
+							<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="mb-3 ">
+									<%= form.label :book_title %>
+									<%= form.text_field :title, class: "form-control" %>
+								</div>
+								<div class="mb-3">
+									<%= form.label :price, "Price" %>
+									<%= form.text_field :amount, class: "form-control" %>
+								</div>
+								<div class="mb-3">
+									<%= form.label :file, "Select Type" %>
+									<%= form.select :book_type, Book.book_types.keys.map { |book_type| [book_type.humanize, book_type] }, { prompt: "--- Select BookType ---"}, { class: 'form-control' } %>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+								Close
+							</button>
+							<%= form.submit "Create Account", class: "btn btn-primary" %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

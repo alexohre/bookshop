@@ -17,7 +17,7 @@ class Account::SettingController < AccountController
   private
 
   def check_profile_completion
-    if current_account && (current_account.first_name.blank? || current_account.last_name.blank? || current_account.address.blank? || current_account.state.blank? || current_account.country.blank?)
+    if current_account && (current_account.first_name.blank? || current_account.last_name.blank? )
       redirect_to edit_account_registration_path, alert: "Please complete your profile information."
     end
   end

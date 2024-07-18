@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   namespace :account do
 
     get 'dashboard', to: 'dashboard#home'
+    get 'books', to: 'books#book'
+    post 'books', to: 'books#create'
+
     # post 'revert_masquerade', to: "dashboard#revert_masquerade"
     # setting
     get 'settings/change_password', to: 'setting#change_password'

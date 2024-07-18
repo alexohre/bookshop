@@ -11,15 +11,12 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Adventure starts here 🚀</h4>
+              <h4 class="mb-2">Lecturer Sign up 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                <%= render "accounts/shared/error_messages", resource: resource %>
-               <div class="mb-3">
-                  <label for="mat_no" class="form-label">Mat No </label> (<span class="text-danger text-sm"><small> You cannot change it after account creation</small></span>)
-                  <input type="text" class="form-control text-uppercase" id="mat_no" name="account[mat_no]" placeholder="Enter your mat no." />
-                </div>
+               
                 <div class="mb-3">
                   <label for="email" class="form-label">Email </label>
                   <input type="email" class="form-control" id="email" name="account[email]" placeholder="Enter your email" />
