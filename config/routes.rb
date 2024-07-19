@@ -21,8 +21,13 @@ Rails.application.routes.draw do
     
     resource :site, only: [:new, :create, :edit, :update]
     get 'dashboard', to: 'dashboard#home'
+
     get 'bookshop', to: 'sales#home'
-    get 'sales', to: 'sales#sales'
+    get 'sales/*mat_no', to: 'sales#sales'
+    get 'clear', to: 'sales#clear'
+    post 'sales/add_to_pending/:book_id', to: 'sales#add_to_pending', as: 'add_to_pending'
+    delete 'sales/remove_from_pending/:book_id', to: 'sales#remove_from_pending', as: 'remove_from_pending'
+  
     get 'students', to: 'dashboard#students'
     get 'new_student', to: 'dashboard#new_student'
     get 'users/:id', to: 'dashboard#show'

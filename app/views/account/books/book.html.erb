@@ -14,6 +14,8 @@
 							<th>Book Title</th>
 							<th>Lecturer Names</th>
 							<th>Book type</th>
+							<th>course Code</th>
+							<th>Price</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -25,6 +27,12 @@
 								<td><%= full_name.present? ? full_name : 'awaiting names' %></td>
 								<td>
 									<%= book.book_type %>
+								</td>
+								<td>
+									<%= book.course_code %>
+								</td>
+								<td>
+									<%= number_to_currency(book.amount, unit: "₦") %>
 								</td>
 								<td>
 									<div class="dropdown" >
@@ -56,12 +64,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="modalCenterTitle">Textbook fee <span class="text-danger fw-bold">200</span> & Manual fee <span class="text-danger fw-bold">100</span></h5>
-							<button
-							type="button"
-							class="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-						></button>
+							<button	type="button"	class="btn-close"	data-bs-dismiss="modal"	aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 							<div class="row">
@@ -69,9 +72,13 @@
 									<%= form.label :book_title %>
 									<%= form.text_field :title, class: "form-control" %>
 								</div>
-								<div class="mb-3">
+								<div class="mb-3 col-md-6">
 									<%= form.label :price, "Price" %>
 									<%= form.text_field :amount, class: "form-control" %>
+								</div>
+								<div class="mb-3 col-md-6">
+									<%= form.label :course_code %>
+									<%= form.text_field :course_code, class: "form-control" %>
 								</div>
 								<div class="mb-3">
 									<%= form.label :file, "Select Type" %>

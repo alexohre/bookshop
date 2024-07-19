@@ -8,12 +8,14 @@ class Account::BooksController < AccountController
     title = params[:title]
     amount = params[:amount]
     book_type = params[:book_type]
+    course_code = params[:course_code]
 
     @book = Book.new(
       title: title,
       amount: amount,
       account: current_account,  # Assign the model instance, not the ID
-      book_type: book_type
+      book_type: book_type,
+      course_code: course_code.upcase
     )
 
     if @book.save

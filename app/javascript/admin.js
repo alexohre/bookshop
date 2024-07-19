@@ -13,4 +13,5 @@ import "./custom/perfect-scrollbar";
 import "./custom/menu";
 // import "./custom/apexcharts";
 import "./custom/main";
-import "./custom/dashboards-analytics";
+// import "./custom/dashboards-analytics";
+import "./sales";

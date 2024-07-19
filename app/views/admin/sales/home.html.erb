@@ -7,11 +7,15 @@
 						<div class="card-body">
 							<h5 class="card-title text-primary">Search student</h5>
 							<div>
-								<label for="defaultFormControlInput" class="form-label">Mat No.</label>
-								<div class="input-group input-group-merge w-100">
-									<span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-									<input type="text" class="form-control" placeholder="Search..." >
-								</div>
+								<%= form_with url: admin_bookshop_path, method: :get, local: true do %>
+									<div class="input-group mt-3 mb-2 text-">
+										<%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search staff..." %>
+										<button class="btn btn-primary" type="submit" id="button-addon2" data-turbo="false">
+											<span class="tf-icons bx bx-search-alt"></span>
+											Search
+										</button>
+									</div>
+								<% end %>
 							</div>
 						</div>
 					</div>
@@ -34,27 +38,24 @@
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-										<tr>
-											<td>
-												John Okafor Matthew
-											</td>
-											<td>COM/HND/22/00342</td>
-											<td>
-												Computer Science
-											</td>
-											<td>Hnd 2</td>
-											<td>
-												<div class="dropdown">
-													<button type="button" class="btn btn-sm btn-primary" >
-														continue
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-														<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
+										<% @students.each do |student| %>
+											<tr>
+												<td>
+													<% names = "#{student&.first_name} #{student&.last_name} #{student&.other_name}" %>
+													<%= names %>
+												</td>
+												<td><span class="text-uppercase"><%= student.mat_no %></span></td>
+												<td>
+													<%= student.department %>
+												</td>
+												<td><%= student.level %></td>
+												<td>
+													<div class="dropdown">
+														<%= link_to "continue", admin_path(student.mat_no), class: "btn btn-sm btn-primary" %>
 													</div>
-												</div>
-											</td>
-										</tr>
+												</td>
+											</tr>
+										<% end %>
 									</tbody>
 								</table>
 							</div>

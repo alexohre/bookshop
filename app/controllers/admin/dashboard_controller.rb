@@ -7,7 +7,7 @@ class Admin::DashboardController < AdminController
     # @recent_deposits = Deposit.includes(:account, :payment_method).order(id: :desc).limit(5)
   end
 
-  def sales 
+  def sales
     @title = "Sales"
   end
 
