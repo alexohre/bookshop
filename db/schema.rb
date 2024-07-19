@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_18_132323) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_204310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -100,6 +100,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_18_132323) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sale_items", force: :cascade do |t|
+    t.bigint "sale_id", null: false
+    t.integer "book_id"
+    t.string "title"
+    t.decimal "amount", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sale_id"], name: "index_sale_items_on_sale_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.decimal "total_amount", precision: 10, scale: 2
+    t.bigint "student_id", null: false
+    t.string "cashier_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_sales_on_student_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.string "contact_number"
     t.string "contact_email"
@@ -140,4 +159,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_18_132323) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "accounts"
+  add_foreign_key "sale_items", "sales"
+  add_foreign_key "sales", "students"
 end

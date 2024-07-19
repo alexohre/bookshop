@@ -33,9 +33,9 @@
 										<thead>
 											<tr>
 												<th>Book title</th>
+												<th>Book Type</th>
 												<th>course Code</th>
 												<th>Price</th>
-												<%# <th>Level</th> %>
 												<th>Actions</th>
 											</tr>
 										</thead>
@@ -45,6 +45,7 @@
 													<td>
 														<%= book.title %>
 													</td>
+													<td><%= book.book_type.capitalize %></td>
 													<td><%= book.course_code %></td>
 													<td>
 														<%= number_to_currency(book.amount, unit: "₦") %>
@@ -94,9 +95,13 @@
 				</div>
 				<div class="card">
 					<div class="card-body">
-						<div class="card-title">
-							<%= link_to "Clear Session", admin_clear_path, class: "btn btn-secondary " %>
-							<%= link_to "Print", admin_clear_path, class: "btn btn-primary px-5" %>
+						<div class="d-flex justify-content-between ">
+							<%= link_to "Clear Orders", admin_clear_path, class: "btn btn-outline-secondary px-2", data: {turbo: false, confirm: "Are you sure?"} %>
+							<% if @pending_orders.any? %>
+								<%= button_to "Create Sale", admin_sales_path(mat_no: @student.mat_no), class: "btn btn-primary px-5", method: :post %>
+							<% else %>
+								<%= button_to "Create Sale", "#", class: "btn btn-primary px-5", disabled: true %>
+							<% end %>
 						</div>
 					</div>
 				</div>

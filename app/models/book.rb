@@ -1,5 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :account
+  has_many :sale_items
+
 
   enum book_type: [:textbook, :manual]
 

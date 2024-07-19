@@ -1,4 +1,5 @@
 class Admin::SalesController < AdminController
+  before_action :set_student, only: [:sales, :create, :show]
   def home
     @title = "Sales Home"
     @q = Student.ransack(search_params)
@@ -14,7 +15,7 @@ class Admin::SalesController < AdminController
 
   def sales 
     @title = "Sales"
-    @student = Student.find_by(mat_no: params[:mat_no])
+    # @student = Student.find_by(mat_no: params[:mat_no])
 
     @pending_orders = session[:pending_orders] || []
     # @total_books = @pending_orders.size
@@ -35,6 +36,46 @@ class Admin::SalesController < AdminController
     end
   end
 
+  def create
+    @pending_orders = session[:pending_orders] || []
+
+    if @pending_orders.empty?
+      flash[:notice] = "No pending orders to create a sale."
+      redirect_to root_path and return
+    end
+
+    total_amount = @pending_orders.sum { |order| order.transform_keys(&:to_sym)[:amount].to_f }
+    cashier_name = "#{current_user.first_name} #{current_user.last_name}"
+
+    @sale = Sale.new(total_amount: total_amount, student: @student, cashier_name: cashier_name)
+
+    if @sale.save
+      @pending_orders.each do |order|
+        order.transform_keys!(&:to_sym)
+        SaleItem.create!(
+          sale: @sale,
+          book_id: order[:id],
+          title: order[:title],
+          amount: order[:amount].to_f
+        )
+      end
+
+      # Clear the pending orders
+      session[:pending_orders] = []
+
+      flash[:notice] = "Sale created successfully."
+      redirect_to admin_sale_path(@sale)
+    else
+      flash[:alert] = "Failed to create sale."
+      redirect_to request.referrer
+    end
+  end
+
+  def show
+    @sale = Sale.find(params[:id])
+
+  end
+
   def add_to_pending
     book = Book.find(params[:book_id])
     @pending_orders = session[:pending_orders] || []
@@ -42,6 +83,7 @@ class Admin::SalesController < AdminController
     @pending_orders << {
       id: book.id,
       title: book.title,
+      book_type: book.book_type,
       course_code: book.course_code,
       amount: book.amount.to_f
     }
@@ -92,6 +134,10 @@ class Admin::SalesController < AdminController
 
 
   private
+
+  def set_student
+    @student = Student.find_by(mat_no: params[:mat_no]) # Assuming mat_no is passed in params
+  end
 
   def search_params
     search_query = if params[:q].present?

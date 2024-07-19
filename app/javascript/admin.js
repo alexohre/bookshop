@@ -14,4 +14,4 @@ import "./custom/menu";
 // import "./custom/apexcharts";
 import "./custom/main";
 // import "./custom/dashboards-analytics";
-import "./sales";
+// import "./sales";

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resource :site, only: [:new, :create, :edit, :update]
     get 'dashboard', to: 'dashboard#home'
 
+    # config/routes.rb
+    resources :sales, only: [:create, :show]
     get 'bookshop', to: 'sales#home'
     get 'sales/*mat_no', to: 'sales#sales'
     get 'clear', to: 'sales#clear'

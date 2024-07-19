@@ -4,6 +4,7 @@ class Student < ApplicationRecord
   validates :first_name, :last_name, :other_name, :email, :department, :course, :level, presence: true
   validates :mat_no, uniqueness: true
   
+  has_many :sales
   
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

@@ -8,6 +8,7 @@
 	<thead>
 		<tr>
 			<th>Book title</th>
+			<th>Book Type</th>
 			<th>Course Code</th>
 			<th>Price</th>
 			<th>Actions</th>
@@ -18,6 +19,7 @@
 			<% order = order.transform_keys(&:to_sym) %>
 			<tr id="pending_order_<%= order[:id] %>">
 				<td><%= order[:title] %></td>
+				<td><%= order[:book_type].capitalize %></td>
 				<td><%= order[:course_code] %></td>
 				<td><%= number_to_currency(order[:amount], unit: "₦") %></td>
 				<td>
