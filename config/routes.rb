@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     # config/routes.rb
     resources :sales, only: [:create, :show]
+    get 'sales_history', to: 'sales#sales_history'
     get 'bookshop', to: 'sales#home'
     get 'sales/*mat_no', to: 'sales#sales'
     get 'clear', to: 'sales#clear'

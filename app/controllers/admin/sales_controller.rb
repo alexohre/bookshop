@@ -76,6 +76,21 @@ class Admin::SalesController < AdminController
 
   end
 
+  def sales_history
+    @title = "Order History"
+    @order_search = Sale.ransack(orders_search_params)
+     if params[:q].present?
+      @pagy, @sales = pagy(@order_search.result(distinct: true))
+      
+      if @sales.empty?
+        flash.now[:alert] = "No order found for search query: #{params[:q]}"
+      end
+    else
+      @pagy, @sales = pagy(@order_search.result(distinct: true).order(id: :desc), items: 8)
+    end
+
+  end
+
   def add_to_pending
     book = Book.find(params[:book_id])
     @pending_orders = session[:pending_orders] || []
@@ -159,6 +174,14 @@ class Admin::SalesController < AdminController
     end
 
     search_query || {} # Ensure it returns a hash
+  end
+
+  def orders_search_params
+    if params[:q].present?
+      { student_mat_no_cont: params[:q] }
+    else
+      {}
+    end
   end
 
 end

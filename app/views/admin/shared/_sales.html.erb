@@ -24,6 +24,12 @@
 			<li class="menu-header small">
 				<span class="menu-header-text">Pages</span>
 			</li>
+			<li class="menu-item <%= 'active' if request.path == admin_sales_history_path %>">
+				<a href="<%= admin_sales_history_path %>" class="menu-link" data-turbo="false">
+					<i class="menu-icon tf-icons bx bx-history"></i>
+					<div data-i18n="Analytics">Order History</div>
+				</a>
+			</li>
 			<!-- User interface -->
 			<li class="menu-item <%= 'active open' if request.path == admin_settings_account_path || request.path == admin_settings_site_details_path || request.path == admin_settings_password_path %>">
 				<a href="javascript:void(0)" class="menu-link menu-toggle">

@@ -52,6 +52,8 @@
 							<% full_name = "#{@sale.student&.first_name} #{@sale.student&.last_name} #{@sale.student&.other_name}" %>
 							<h4><%= full_name %></h4>
 							<p><%= @sale.student.department %></p>
+							<br>
+							<h4>Cashier: <span class="text-dark"><%= @sale.cashier_name %></span></h4>
 						</div>
 					</div>
 				</div>

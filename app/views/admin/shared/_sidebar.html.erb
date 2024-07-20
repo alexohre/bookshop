@@ -57,6 +57,12 @@
 					</li>
 				</ul>
 			</li>
+			<li class="menu-item <%= 'active' if request.path == admin_sales_history_path %>">
+				<a href="<%= admin_sales_history_path %>" class="menu-link" data-turbo="false">
+					<i class="menu-icon tf-icons bx bx-history"></i>
+					<div data-i18n="Analytics">Order History</div>
+				</a>
+			</li>
 			<!-- Extended components -->
 			<%# if defined?(@room) && @room.present? %>
 			<li class="menu-item <%#= 'active open' if request.path == admin_rooms_path || request.path == edit_admin_room_path(@room) || request.path == admin_room_path(@room) %>">

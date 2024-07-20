@@ -1,5 +1,5 @@
 class SaleItem < ApplicationRecord
-  belongs_to :sale
+  belongs_to :sale, counter_cache: true
   belongs_to :book
   
 
