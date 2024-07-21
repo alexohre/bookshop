@@ -6,16 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-puts "creating user"
-User.create!(email: "hello@test.com", password: "password")
-puts "user created"
-
-acc = Account.create!(email: "ella@rose.com", password: 123456, mat_no: "com/ahnd/2024/00234" )
-puts "Account created"
-
-
-puts "creating hostel type.."
-HostelType.create!([{name: "Male Hostel"}, {name: "Female Hostel"}])
-puts "hostel type created!"
+puts "creating admin user"
+User.create!(email: "admin@bookshop.com", password: "password", role: 0)
+puts "Admin user created"
 
 

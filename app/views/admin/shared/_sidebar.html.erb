@@ -64,18 +64,18 @@
 				</a>
 			</li>
 			<!-- Extended components -->
-			<%# if defined?(@room) && @room.present? %>
-			<li class="menu-item <%#= 'active open' if request.path == admin_rooms_path || request.path == edit_admin_room_path(@room) || request.path == admin_room_path(@room) %>">
-				<%# else %>
-				<li class="menu-item <%#= 'active open' if request.path == admin_rooms_path %>">
-					<% #end %>
+			<% if defined?(@book) && @book.present? %>
+				<li class="menu-item <%= 'active open' if request.path == admin_stock_index_path || request.path == edit_admin_stock_path(@book) || request.path == admin_room_path(@room) %>">
+				<% else %>
+					<li class="menu-item <%= 'active open' if request.path == admin_stock_index_path %>">
+					<% end %>
 					<a href="javascript:void(0);" class="menu-link menu-toggle">
 						<i class="menu-icon tf-icons bx bx-book"></i>
-						<div data-i18n="Account Settings">TextBooks</div>
+						<div data-i18n="Account Settings">Stocks</div>
 					</a>
 					<ul class="menu-sub">
-						<li class="menu-item <%#= 'active' if request.path == admin_rooms_path %>">
-							<a href="<%#= admin_rooms_path %>" class="menu-link" data-turbo="false">
+						<li class="menu-item <%= 'active' if request.path == admin_stock_index_path %>">
+							<a href="<%= admin_stock_index_path %>" class="menu-link" data-turbo="false">
 								<div data-i18n="Account">Overview</div>
 							</a>
 						</li>

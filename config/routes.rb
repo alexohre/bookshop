@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#home'
 
     # config/routes.rb
+    resources :stock, only: [:index, :edit, :update]
     resources :sales, only: [:create, :show]
     get 'sales_history', to: 'sales#sales_history'
     get 'bookshop', to: 'sales#home'
