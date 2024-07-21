@@ -9,10 +9,7 @@ class SaleItem < ApplicationRecord
   private
 
   def reduce_book_stock
-    sale_items.each do |item|
-      book = item.book
-      book.reduce_stock(item.quantity)
-    end
+    book.reduce_stock(1) if book.present?
   end
-  
+
 end

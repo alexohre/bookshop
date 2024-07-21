@@ -49,24 +49,29 @@ class Admin::SalesController < AdminController
 
     @sale = Sale.new(total_amount: total_amount, student: @student, cashier_name: cashier_name)
 
-    if @sale.save
-      @pending_orders.each do |order|
-        order.transform_keys!(&:to_sym)
-        SaleItem.create!(
-          sale: @sale,
-          book_id: order[:id],
-          title: order[:title],
-          amount: order[:amount].to_f
-        )
+    Sale.transaction do
+      if @sale.save
+        @pending_orders.each do |order|
+          order.transform_keys!(&:to_sym)
+          SaleItem.create!(
+            sale: @sale,
+            book_id: order[:id],
+            title: order[:title],
+            amount: order[:amount].to_f
+          )
+        end
+
+        # Clear the pending orders
+        session[:pending_orders] = []
+
+        flash[:notice] = "Sale created successfully."
+        redirect_to admin_sale_path(@sale)
+      else
+        flash[:alert] = "Failed to create sale."
+        redirect_to request.referrer
       end
-
-      # Clear the pending orders
-      session[:pending_orders] = []
-
-      flash[:notice] = "Sale created successfully."
-      redirect_to admin_sale_path(@sale)
-    else
-      flash[:alert] = "Failed to create sale."
+    rescue => e
+      flash[:alert] = "An error occurred: #{e.message}"
       redirect_to request.referrer
     end
   end

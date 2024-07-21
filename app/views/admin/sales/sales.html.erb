@@ -53,8 +53,10 @@
 													<%# <td>Hnd 2</td> %>
 													<% book_in_pending = @pending_orders.any? { |order| order.transform_keys(&:to_sym)[:id] == book.id } %>
 													<td>
-														<% if book_in_pending %>
-															<button class="btn btn-sm btn-primary" disabled>Add Book</button>
+														<% if book.stock == 0 %>
+															<button class="btn btn-sm btn-danger" disabled>Out of Stock</button>
+														<% elsif book_in_pending %>
+															<button class="btn btn-sm btn-secondary" disabled>Add Book</button>
 														<% else %>
 															<%= button_to "Add Book", admin_add_to_pending_path(book.id), class: "btn btn-sm btn-primary", method: :post %>
 														<% end %>

@@ -1,3 +1,6 @@
+
+<% if current_user.admin? %>
+
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="row">
     <div class="col-lg-8 mb-4 order-0">
@@ -5,7 +8,8 @@
         <div class="d-flex align-items-end row">
           <div class="col-sm-7">
             <div class="card-body">
-              <h5 class="card-title text-primary">Welcome Back John! 🎉</h5>
+              <% name = "#{current_user&.first_name}" %>
+              <h1 class="card-title text-primary">Welcome Back <span class="fw-bold text-danger"><%= name.present? ? name : current_user.username %>!</span> 🎉</h1>
               <p class="mb-4">
                 Today is a brand new oppotunity to do more
               </p>
@@ -38,7 +42,7 @@
                 
               </div>
               <span class="fw-semibold d-block mb-1">Students</span>
-              <h3 class="card-title mb-2"><%= 0 %></h3>
+              <h3 class="card-title mb-2"><%= @total_students %></h3>
             </div>
           </div>
         </div>
@@ -52,7 +56,7 @@
                 
               </div>
               <span>Staffs</span>
-              <h3 class="card-title text-nowrap mb-1"><%= 0 %></h3>
+              <h3 class="card-title text-nowrap mb-1"><%= @total_staff %></h3>
             </div>
           </div>
         </div>
@@ -63,45 +67,41 @@
       <div class="card">
         <div class="row row-bordered g-0">
           <div class="col">
-            <h5 class="card-header m-0 me-2 pb-3">(5) Recent Accommodations</h5>
+            <h5 class="card-header m-0 me-2 pb-3">(5) Recent Orders</h5>
             <div class="table-responsive text-nowrap">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Reference</th>
+                    <th>S/N</th>
+                    <th>Mat No</th>
+                    <th>Total Books</th>
+                    <th>Cashier</th>
                     <th>Amount</th>
-                    <th>Students</th>
-                    <th>Hostel</th>
-                    <th>Room</th>
-                    <th>Bed</th>
-                    <th>Date</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                  <%# if @accommondations.present? %>
-                    <%# @accommondations.each do |acc| %>
+                  <% if @recent_sales.present? %>
+                    <% @recent_sales.includes(:student).each_with_index do |sale, index| %>
                       <tr>
-                        <td><small><%#= acc.ref_no %></small></td>
-                        <td><%#= number_to_currency(acc.amount, precision: 2, unit: "₦") %></td>
+                        <td><%= index + 1 %></td>
                         <td>
-                          <%# full_name = "#{acc.account&.first_name} #{acc.account&.last_name}" if acc.account&.first_name.present? && acc.account&.last_name.present? %>
-                          <%#= full_name.present? ? full_name : "Awaiting names" %>
+                          <%= sale.student.mat_no %>
                         </td>
                         <td>
-                            <%#= acc.hostel %>
+                            <%= sale.sale_items_count %>
                         </td>
-                        <td><%#= acc.room_type %></td>
-                        <td><%#= acc.bed %></td>
-                        <td>
-                          <%#= acc.created_at.strftime("	%d-%m-%Y ") %>
-                        </td>
+                        <td><%= sale.cashier_name %></td>
+                        <td><span class="text-primary"><%= number_to_currency(sale.total_amount, precision: 2, unit: "₦") %></span></td>
+                        <td><%= link_to "View", admin_sale_path(sale), class: "btn btn-sm btn-primary" %></td>
+                        
                       </tr>
-                    <%# end %>
-                  <%# else %>
+                    <% end %>
+                  <% else %>
                     <tr >
-                      <td colspan="6" class="text-center fs-3 ">No Accommodations Yet </td>
+                      <td colspan="6" class="text-center fs-3 ">No Orders Yet </td>
                     </tr>
-                  <%# end %>
+                  <% end %>
                 </tbody>
               </table>
             </div>
@@ -124,8 +124,8 @@
                 </div>
                 
               </div>
-              <span class="d-block mb-1">Hnd Students</span>
-              <h3 class="card-title text-nowrap mb-2"><%= 0 %></h3>
+              <span class="d-block mb-1">Lecturers</span>
+              <h3 class="card-title text-nowrap mb-2"><%= @total_lecturer %></h3>
             </div>
           </div>
         </div>
@@ -134,54 +134,88 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <i class='bx bx-group rounded fs-1'></i>
+                  <i class='bx bx-book rounded fs-1'></i>
                 </div>
                 
               </div>
-              <span class="fw-semibold d-block mb-1">Nd Students</span>
-              <h3 class="card-title mb-2"><%= 0 %></h3>
+              <span class="fw-semibold d-block mb-1">Stocks</span>
+              <h3 class="card-title mb-2"><%= @total_stock %></h3>
             </div>
           </div>
         </div>
-
-        
-
-        <%# <div class="col-12 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                  <div class="card-title">
-                    <h5 class="text-nowrap mb-2">Withdrawals stats</h5>
-                  </div>
-                  <div class="mt-sm-auto">
-                    
-                     <p class="mb-2 d-flex  fs-16 text-black font-w500">Pending
-                      <span class="ms-auto text-dark fs-14 font-w400">0/45</span>
-                    </p>
-                    <div class="progress mb-3" style="height:18px;">
-                      <div class="progress-bar bg-primary progress-animated" style="width:0%; height:18px;" role="progressbar"></div>
-                    </div>
-                    <p class="mb-2 d-flex  fs-16 text-black font-w500">Completed
-                      <span class="ms-auto text-dark fs-14 font-w400">0/45</span>
-                    </p>
-                    <div class="progress mb-3" style="height:18px">
-                      <div class="progress-bar bg-primary progress-animated" style="width:0%; height:18px;" role="progressbar"></div>
-                    </div>
-                    <span class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-         %>
       </div>
     </div>
     
   </div>
  
 </div>
+<% else %>
+  <div class="container-xxl flex-grow-1 container-p-y">
+  <div class="row">
+    <div class="col-lg-8 mb-4 order-0">
+      <div class="card">
+        <div class="d-flex align-items-end row">
+          <div class="col-sm-7">
+            <div class="card-body">
+              <% name = "#{current_user&.first_name}" %>
+              <h1 class="card-title text-primary">Welcome Back <span class="fw-bold text-danger"><%= name.present? ? name : current_user.username %>!</span> 🎉</h1>
+              <p class="mb-4">
+                Today is a brand new oppotunity to do more
+              </p>
+                <h4 class="pb-0 mb-0"><i class="menu-icon tf-icons bx bx-time"> <span id="clock" class="fw-bold"></span></i></h4>
+            </div>
+          </div>
+          <div class="col-sm-5 text-center text-sm-left">
+            <div class="card-body pb-0 px-0 px-md-4">
+              <img
+                src="../assets/img/illustrations/man-with-laptop-light.png"
+                height="140"
+                alt="View Badge User"
+                data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                data-app-light-img="illustrations/man-with-laptop-light.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 order-1">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                  <i class='bx bx-group rounded fs-1'></i>
+                </div>
+                
+              </div>
+              <span class="fw-semibold d-block mb-1">Students</span>
+              <h3 class="card-title mb-2"><%= @total_students %></h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                 <i class='bx bx-group rounded fs-1'></i>
+                </div>
+                
+              </div>
+              <span class="d-block mb-1">Lecturers</span>
+              <h3 class="card-title text-nowrap mb-2"><%= @total_lecturer %></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+<% end %>
+
 
 <script>
   document.addEventListener("turbo:load", function() {

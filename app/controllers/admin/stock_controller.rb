@@ -22,11 +22,14 @@ class Admin::StockController < AdminController
 
   def update
     @book = Book.find(params[:id])
-    if @book.restock(stock_params[:stock].to_i)
-      redirect_to stock_index_path, notice: "Stock updated successfully."
+    restock_quantity = params[:book][:restock_quantity].to_i
+    
+    if @book.restock(restock_quantity)
+      flash[:notice] = "Stock updated successfully"
     else
-      render :edit
+      flash[:alert] = "Failed to update stock"
     end
+    redirect_to admin_stock_index_path
   end
 
   private

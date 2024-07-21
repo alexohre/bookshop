@@ -2,9 +2,13 @@ class Admin::DashboardController < AdminController
   # before_action :check_user_role
   def home
     @title = "Home"
-    @total_acc = Account.count
-    #@accommondations = Accommondation.includes(:account).order(id: :desc).limit(5)
-    # @recent_deposits = Deposit.includes(:account, :payment_method).order(id: :desc).limit(5)
+    @total_lecturer = Account.count
+    @total_students = Student.count
+    @total_stock = Book.count
+    @total_staff = User.count 
+
+    @recent_sales = Sale.order(id: :desc).limit(5)
+
   end
 
   def sales
