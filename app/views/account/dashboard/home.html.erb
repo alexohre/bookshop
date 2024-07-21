@@ -45,7 +45,7 @@
 								</div>
 							</div>
 							<span>Available Stocks</span>
-							<h3 class="card-title text-nowrap mb-1"><span class="text-primary"><%= 43 %></span></h3>
+							<h3 class="card-title text-nowrap mb-1"><span class="text-primary"><%= @total_stock %></span></h3>
 						</div>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 								</div>
 							</div>
 							<span>Withdrawable Amount</span>
-							<h3 class="card-title text-nowrap mb-1"><span>Amount: </span><span class="text-primary"><%= number_to_currency(0, unit: "₦") %></span></h3>
+							<h3 class="card-title text-nowrap mb-1"><span>Amount: </span><span class="text-primary"><%= number_to_currency(current_account.balance, unit: "₦") %></span></h3>
 						</div>
 					</div>
 				</div>

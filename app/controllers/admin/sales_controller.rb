@@ -61,6 +61,7 @@ class Admin::SalesController < AdminController
           )
         end
 
+        update_account_balance(@sale)
         # Clear the pending orders
         session[:pending_orders] = []
 
@@ -187,6 +188,24 @@ class Admin::SalesController < AdminController
     else
       {}
     end
+  end
+
+  def update_account_balance(sale)
+    # Retrieve the account associated with the books in the sale
+    account_id = sale.sale_items.joins(:book).pluck("books.account_id").uniq.first
+    account = Account.find(account_id) # Find the Account instance
+
+    # Calculate the total deduction based on the amount of each book
+    total_deduction = sale.sale_items.joins(:book).sum do |item|
+      book = item.book
+      book.amount # Sum the amount of each book in the sale
+    end
+
+    # Calculate the new balance
+    new_amount = account.balance - total_deduction
+
+    # Update the account's balance with the new amount
+    account.update(balance: new_amount)
   end
 
 end

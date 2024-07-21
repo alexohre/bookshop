@@ -28,6 +28,12 @@
 				<div data-i18n="Analytics">Books</div>
 			</a>
 		</li>
+		<li class="menu-item <%= 'active' if request.path == account_sales_history_path %>">
+			<a href="<%= account_sales_history_path %>" class="menu-link" data-turbo="false">
+				<i class="menu-icon tf-icons bx bx-history"></i>
+				<div data-i18n="Analytics">Order History</div>
+			</a>
+		</li>
 		<!-- User interface -->
 		<li class="menu-item <%= 'active open' if request.path == edit_account_registration_path || request.path == account_settings_change_password_path || request.path == account_settings_profile_path %>">
 			<a href="javascript:void(0)" class="menu-link menu-toggle">

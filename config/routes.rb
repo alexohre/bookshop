@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#home'
     get 'books', to: 'books#book'
     post 'books', to: 'books#create'
+    get 'sales_history', to: 'sales#sales_history'
 
     # post 'revert_masquerade', to: "dashboard#revert_masquerade"
     # setting

@@ -70,19 +70,19 @@
 							<div class="row">
 								<div class="mb-3 ">
 									<%= form.label :book_title %>
-									<%= form.text_field :title, class: "form-control" %>
+									<%= form.text_field :title, class: "form-control", required: true %>
 								</div>
 								<div class="mb-3 col-md-6">
 									<%= form.label :price, "Price" %>
-									<%= form.text_field :amount, class: "form-control" %>
+									<%= form.text_field :amount, class: "form-control", required: true %>
 								</div>
 								<div class="mb-3 col-md-6">
 									<%= form.label :course_code %>
-									<%= form.text_field :course_code, class: "form-control" %>
+									<%= form.text_field :course_code, class: "form-control", required: true %>
 								</div>
 								<div class="mb-3">
 									<%= form.label :file, "Select Type" %>
-									<%= form.select :book_type, Book.book_types.keys.map { |book_type| [book_type.humanize, book_type] }, { prompt: "--- Select BookType ---"}, { class: 'form-control' } %>
+									<%= form.select :book_type, Book.book_types.keys.map { |book_type| [book_type.humanize, book_type] }, { prompt: "--- Select BookType ---"}, { class: 'form-control', required: true } %>
 								</div>
 							</div>
 						</div>
