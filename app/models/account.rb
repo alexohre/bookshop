@@ -37,6 +37,5 @@ class Account < ApplicationRecord
     prefix, domain = email.split('@')
     random_chars = SecureRandom.hex(3) # 6 random characters in hexadecimal form
     self.username = "#{prefix}_#{random_chars}"
-    domain.nil
   end
 end
